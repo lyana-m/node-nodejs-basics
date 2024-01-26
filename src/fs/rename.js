@@ -9,8 +9,6 @@ const rename = async () => {
 
   const files = await readdir(folderPath);
 
-  console.log(files);
-
   if (!files.includes(sourceFile) || files.includes(targetFile)) {
     throw new Error(errorMessage);
   }
