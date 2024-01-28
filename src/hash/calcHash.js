@@ -1,4 +1,4 @@
-import {createHash} from 'node:crypto';
+import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
 import { pipeline } from 'stream';
 import path from 'path';
