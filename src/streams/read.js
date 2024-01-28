@@ -1,12 +1,13 @@
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 import { createReadStream } from 'fs';
 import { pipeline } from 'stream';
-import path from 'path';
 
 const read = async () => {
-  const folderPath = 'src/streams/files';
-  const fileToRead = 'fileToRead.txt';
+  const fileToRead = 'files/fileToRead.txt';
+  const __dirname = dirname(fileURLToPath(import.meta.url));
 
-  const fileStream = createReadStream(path.join(folderPath, fileToRead));
+  const fileStream = createReadStream(join(__dirname, fileToRead));
 
   pipeline(fileStream, process.stdout, (err) => {
     if (err) {
