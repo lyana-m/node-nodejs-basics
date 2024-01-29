@@ -1,8 +1,10 @@
 import { rm, readdir } from 'node:fs/promises';
-import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 
 const remove = async () => {
-  const folderPath = 'src/fs/files';
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const folderPath = join(__dirname, 'files');
   const fileToRemove = 'fileToRemove.txt';
   const errorMessage = 'FS operation failed';
 
@@ -12,7 +14,7 @@ const remove = async () => {
     throw new Error(errorMessage);
   }
 
-  await rm(path.join(folderPath, fileToRemove))
+  await rm(join(folderPath, fileToRemove))
 };
 
 await remove();

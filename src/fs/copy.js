@@ -1,9 +1,11 @@
-import { access, readdir, mkdir, stat, copyFile } from 'node:fs/promises';
-import path from 'path';
+import { access, readdir, mkdir, copyFile } from 'fs/promises';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 
 const copy = async () => {
-  const sourceFolderPath = 'src/fs/files';
-  const copyFolderPath = 'src/fs/files_copy';
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const sourceFolderPath = join(__dirname, 'files');
+  const copyFolderPath = join(__dirname, 'files_copy');
   const errorMessage = 'FS operation failed';
 
   // if sourse folder does not exist - error
@@ -30,8 +32,8 @@ const copy = async () => {
   const files = await readdir(sourceFolderPath);
 
   for (const file of files) {
-    const sourceFilePath = path.join(sourceFolderPath, file);
-    const copyFilePath = path.join(copyFolderPath, file);
+    const sourceFilePath = join(sourceFolderPath, file);
+    const copyFilePath = join(copyFolderPath, file);
 
     await copyFile(sourceFilePath, copyFilePath);
   }

@@ -1,8 +1,10 @@
-import { writeFile, access } from 'node:fs/promises';
-// import { access } from 'node:fs';
+import { writeFile, access } from 'fs/promises';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 
 const create = async () => {
-  const path = 'src/fs/files/fresh.txt';
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const path = join(__dirname, 'files', 'fresh.txt');
 
   try {
     await access(path);
@@ -15,21 +17,5 @@ const create = async () => {
     }
   }
 };
-
-// const create = () => {
-//   const path = 'src/fs/files/fresh.txt';
-
-//   access(path, (err) => {
-//     if (!err) {
-//       throw new Error('FS operation failed');
-//     }
-
-//     writeFile(path, 'I am fresh and young', (err) => {
-//       if (err) {
-//         throw new Error('FS operation failed');
-//       }
-//     });
-//   });
-// }
 
 await create();

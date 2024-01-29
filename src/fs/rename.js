@@ -1,8 +1,10 @@
-import { rename as baseRename, readdir } from 'node:fs/promises';
-import path from 'path';
+import { rename as baseRename, readdir } from 'fs/promises';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 
 const rename = async () => {
-  const folderPath = 'src/fs/files';
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const folderPath = join(__dirname, 'files');
   const sourceFile = 'wrongFilename.txt';
   const targetFile = 'properFilename.md';
   const errorMessage = 'FS operation failed';
@@ -13,7 +15,7 @@ const rename = async () => {
     throw new Error(errorMessage);
   }
 
-  await baseRename(path.join(folderPath, sourceFile), path.join(folderPath, targetFile))
+  await baseRename(join(folderPath, sourceFile), join(folderPath, targetFile))
 };
 
 await rename();
