@@ -4,10 +4,10 @@ import { createWriteStream } from 'fs';
 import { pipeline } from 'stream';
 
 const write = async () => {
-  const fileToWrite = 'files/fileToWrite.txt';
+  const fileToWrite = 'fileToWrite.txt';
   const __dirname = dirname(fileURLToPath(import.meta.url));
 
-  const rs = createWriteStream(join(__dirname, fileToWrite));
+  const rs = createWriteStream(join(__dirname, 'files', fileToWrite));
 
   pipeline(process.stdin, rs, (err) => {
     if (err) {
